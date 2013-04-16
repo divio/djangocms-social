@@ -26,6 +26,9 @@ class LikePlugin(CMSPluginBase):
     def render(self, context, instance, placeholder):
         context['instance'] = instance
         context['placeholder'] = placeholder
+        if instance.image_id:
+            r = context['request']
+            context['image_url'] = '%s://%s%s' % ('https' if r.is_secure() else 'http', r.get_host(), instance.image.url)
         return context
 
 plugin_pool.register_plugin(LikePlugin)

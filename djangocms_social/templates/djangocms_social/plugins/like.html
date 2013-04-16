@@ -2,7 +2,7 @@
 
 {% addtoblock "js" %}<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>{% endaddtoblock %}
 
-{% if instance.image %}{% set_tag 'image' instance.image.url %}{% endif %}
+{% if image_url %}{% set_tag 'image' image_url %}{% endif %}
 {% if instance.title %}{% set_tag 'title' instance.title %}{% endif %}
 {% if instance.description %}{% set_tag 'description' instance.description %}{% endif %}
 <div class="plugin_social">
