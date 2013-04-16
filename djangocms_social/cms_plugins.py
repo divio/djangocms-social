@@ -16,12 +16,17 @@ class LikePlugin(CMSPluginBase):
 
     fieldsets = (
         (None, {
-            'fields': (('facebook', 'google',),)
+            'fields': (('facebook', 'google', 'twitter', 'pinterest', 'email'),)
         }),
         (_('Advanced'), {
             'fields': ('title', 'description', 'image',)
         }),
     )
+
+    def render(self, context, instance, placeholder):
+        context['instance'] = instance
+        context['placeholder'] = placeholder
+        return context
 
 plugin_pool.register_plugin(LikePlugin)
 

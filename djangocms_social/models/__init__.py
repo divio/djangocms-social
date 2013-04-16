@@ -12,6 +12,9 @@ from djangocms_social import defaults
 class Like(CMSPlugin):
     facebook = models.BooleanField(_('facebook'), default=False)
     google = models.BooleanField(_('google'), default=False)
+    twitter = models.BooleanField(_('twitter'), default=False)
+    pinterest = models.BooleanField(_('pinterest'), default=False)
+    email = models.BooleanField(_('email'), default=False)
 
     # options
     title = models.CharField(_('title'), max_length=255, default=defaults.LIKE['title'], blank=True, null=True,
@@ -25,20 +28,18 @@ class Like(CMSPlugin):
         super(Like, self).__init__(*args, **kwargs)
         self.options = likes.AVAILABLE
 
-    @property
     def get_objects(self):
         objects = []
         for type, object in self.options.iteritems():
             if getattr(self, type, False):
-                objects.append(getattr(likes, object)(**self.get_kwargs))
+                objects.append(getattr(likes, object)(**self.get_kwargs()))
         return objects
 
-    @property
     def get_kwargs(self):
         kwargs = {
             'title': self.title,
             'description': self.description,
-            }
+        }
         return kwargs
 
 
